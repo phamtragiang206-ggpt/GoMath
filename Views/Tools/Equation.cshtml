@@ -1,0 +1,138 @@
+@model GoMath.Models.EquationViewModel
+@{
+    ViewData["Title"] = "Giải phương trình";
+}
+
+<section class="page-header">
+    <div class="container">
+        <div class="gm-breadcrumb mb-3">
+            <a asp-controller="Home" asp-action="Index">Trang chủ</a> /
+            <span>Giải phương trình</span>
+        </div>
+        <div class="page-icon"><i class="bi bi-superscript"></i></div>
+        <h1>Giải phương trình</h1>
+        <p>Hỗ trợ phương trình bậc nhất và bậc hai – hiển thị từng bước chi tiết</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Form -->
+            <div class="col-lg-5">
+                <div class="gm-form-card">
+                    <h5 class="fw-700 mb-4 text-white">Nhập hệ số</h5>
+
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Type toggle -->
+                        <div class="mb-4">
+                            <label class="form-label">Loại phương trình</label>
+                            <div class="type-toggle">
+                                <input type="radio" name="EquationType" id="typeLinear" value="linear"
+                                    @(Model.EquationType == "linear" ? "checked" : "") />
+                                <label for="typeLinear">Bậc nhất ax + b = 0</label>
+                                <input type="radio" name="EquationType" id="typeQuadratic" value="quadratic"
+                                    @(Model.EquationType == "quadratic" ? "checked" : "") />
+                                <label for="typeQuadratic">Bậc hai ax² + bx + c = 0</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-4">
+                                <label class="form-label">Hệ số a</label>
+                                <input type="number" class="form-control" name="A" value="@Model.A" step="any" placeholder="1" />
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">Hệ số b</label>
+                                <input type="number" class="form-control" name="B" value="@Model.B" step="any" placeholder="-5" />
+                            </div>
+                            <div class="col-4" id="cGroup">
+                                <label class="form-label">Hệ số c</label>
+                                <input type="number" class="form-control" name="C" value="@Model.C" step="any" placeholder="6" />
+                            </div>
+                        </div>
+
+                        <!-- Formula preview -->
+                        <div class="mb-4" style="background:rgba(255,255,255,0.04);border-radius:10px;padding:16px;text-align:center;">
+                            <span style="color:#94a3b8;font-size:0.85rem;">Phương trình:</span>
+                            <div id="formulaPreview" style="font-size:1.1rem;color:white;margin-top:4px;font-weight:600;">
+                                \( ax + b = 0 \)
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-gm-primary w-100">
+                            <i class="bi bi-play-fill me-2"></i>Giải phương trình
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="col-lg-7">
+                @if (Model.Result != null)
+                {
+                    <div class="result-box mb-4">
+                        <div class="result-label"><i class="bi bi-check2-circle me-1"></i>Kết quả</div>
+                        <div class="result-value">@Model.Result</div>
+                    </div>
+
+                    @if (Model.Steps.Any())
+                    {
+                        <div class="gm-form-card">
+                            <h6 class="fw-700 mb-3" style="color:#94a3b8;text-transform:uppercase;font-size:0.8rem;letter-spacing:1px;">
+                                <i class="bi bi-list-ol me-2"></i>Các bước giải
+                            </h6>
+                            <ul class="steps-list">
+                                @foreach (var step in Model.Steps)
+                                {
+                                    <li>@step</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="gm-form-card text-center py-5">
+                        <i class="bi bi-function" style="font-size:3rem;color:#334155;"></i>
+                        <p class="mt-3" style="color:#475569;">Nhập hệ số và nhấn "Giải phương trình" để xem kết quả</p>
+
+                        <div class="mt-4 text-start" style="background:rgba(255,255,255,0.03);border-radius:10px;padding:20px;">
+                            <div style="font-size:0.85rem;color:#94a3b8;font-weight:600;margin-bottom:12px;">CÔNG THỨC</div>
+                            <div class="mb-2" style="font-size:0.9rem;color:#cbd5e1;">\( ax + b = 0 \Rightarrow x = -\frac{b}{a} \)</div>
+                            <div style="font-size:0.9rem;color:#cbd5e1;">\( \Delta = b^2 - 4ac \)</div>
+                            <div style="font-size:0.9rem;color:#cbd5e1;">\( x_{1,2} = \frac{-b \pm \sqrt{\Delta}}{2a} \)</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    const radios = document.querySelectorAll('input[name="EquationType"]');
+    const preview = document.getElementById('formulaPreview');
+    const cGroup = document.getElementById('cGroup');
+
+    function updateFormula() {
+        const type = document.querySelector('input[name="EquationType"]:checked').value;
+        if (type === 'linear') {
+            preview.innerHTML = '\\( ax + b = 0 \\)';
+            cGroup.style.opacity = '0.4';
+            cGroup.querySelector('input').disabled = true;
+        } else {
+            preview.innerHTML = '\\( ax^2 + bx + c = 0 \\)';
+            cGroup.style.opacity = '1';
+            cGroup.querySelector('input').disabled = false;
+        }
+        if (window.MathJax) MathJax.typesetPromise([preview]);
+    }
+
+    radios.forEach(r => r.addEventListener('change', updateFormula));
+    updateFormula();
+</script>
+}

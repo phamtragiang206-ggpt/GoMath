@@ -1,0 +1,100 @@
+@model GoMath.Models.PrimeViewModel
+@{
+    ViewData["Title"] = "Kiểm tra số nguyên tố";
+}
+
+<section class="page-header">
+    <div class="container">
+        <div class="gm-breadcrumb mb-3">
+            <a asp-controller="Home" asp-action="Index">Trang chủ</a> /
+            <span>Kiểm tra số nguyên tố</span>
+        </div>
+        <div class="page-icon"><i class="bi bi-123"></i></div>
+        <h1>Kiểm tra số nguyên tố</h1>
+        <p>Nhập một số nguyên dương để kiểm tra và xem giải thích chi tiết</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-5">
+                <div class="gm-form-card">
+                    <h5 class="fw-700 mb-4 text-white">Nhập số cần kiểm tra</h5>
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="mb-4">
+                            <label class="form-label">Số nguyên dương n</label>
+                            <input type="number" class="form-control" name="Number" value="@Model.Number" min="1" max="999999999" placeholder="Ví dụ: 97" style="font-size:1.5rem;text-align:center;font-weight:700;" />
+                        </div>
+                        <button type="submit" class="btn-gm-primary w-100">
+                            <i class="bi bi-search me-2"></i>Kiểm tra
+                        </button>
+                    </form>
+
+                    <!-- Quick examples -->
+                    <div class="mt-4">
+                        <div style="font-size:0.8rem;color:#64748b;margin-bottom:10px;">Ví dụ nhanh:</div>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var n in new[] { 2, 7, 17, 97, 100, 127 })
+                            {
+                                <button type="button" onclick="document.querySelector('[name=Number]').value=@n"
+                                    style="background:rgba(255,255,255,0.06);border:1px solid #334155;color:#94a3b8;border-radius:8px;padding:4px 12px;font-size:0.82rem;cursor:pointer;transition:all 0.2s;"
+                                    onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'"
+                                    onmouseout="this.style.borderColor='#334155';this.style.color='#94a3b8'">@n</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                @if (Model.IsPrime.HasValue)
+                {
+                    <div class="mb-4" style="background:@(Model.IsPrime.Value ? "rgba(34,197,94,0.08)" : "rgba(239,68,68,0.08)");border:1px solid @(Model.IsPrime.Value ? "rgba(34,197,94,0.25)" : "rgba(239,68,68,0.25)");border-radius:var(--radius);padding:32px;text-align:center;">
+                        <div style="font-size:4rem;font-weight:800;color:@(Model.IsPrime.Value ? "var(--primary)" : "#f87171");">
+                            @Model.Number
+                        </div>
+                        <div class="mt-2">
+                            @if (Model.IsPrime.Value)
+                            {
+                                <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,0.2);color:var(--primary);padding:8px 20px;border-radius:100px;font-weight:700;">
+                                    <i class="bi bi-check-circle-fill"></i> Là số nguyên tố
+                                </span>
+                            }
+                            else
+                            {
+                                <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.2);color:#f87171;padding:8px 20px;border-radius:100px;font-weight:700;">
+                                    <i class="bi bi-x-circle-fill"></i> Không phải số nguyên tố
+                                </span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="gm-form-card">
+                        <h6 class="fw-700 mb-3" style="color:#94a3b8;text-transform:uppercase;font-size:0.8rem;letter-spacing:1px;">
+                            <i class="bi bi-info-circle me-1"></i>Giải thích
+                        </h6>
+                        <p style="color:#cbd5e1;line-height:1.7;">@Model.Explanation</p>
+                        <div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:14px;margin-top:12px;">
+                            <div style="font-size:0.85rem;color:#94a3b8;">Điều kiện kiểm tra:</div>
+                            <div style="color:#cbd5e1;font-size:0.9rem;margin-top:6px;">
+                                \( \text{Với mọi } i \in [2, \sqrt{n}]: n \nmid i \)
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="gm-form-card text-center py-5">
+                        <i class="bi bi-hash" style="font-size:3rem;color:#334155;"></i>
+                        <p class="mt-3" style="color:#475569;">Nhập số và nhấn kiểm tra</p>
+                        <div class="mt-3" style="font-size:0.85rem;color:#475569;">
+                            Số nguyên tố là số tự nhiên lớn hơn 1, chỉ chia hết cho 1 và chính nó.
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

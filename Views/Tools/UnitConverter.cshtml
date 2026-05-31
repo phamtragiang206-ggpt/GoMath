@@ -1,0 +1,111 @@
+@model GoMath.Models.UnitConverterViewModel
+@{
+    ViewData["Title"] = "Chuyển đổi đơn vị";
+    var unitMap = new Dictionary<string, string[]> {
+        ["length"] = new[] { "mm", "cm", "m", "km" },
+        ["mass"] = new[] { "g", "kg", "tấn" },
+        ["area"] = new[] { "cm²", "m²", "ha", "km²" },
+        ["volume"] = new[] { "ml", "lít", "m³" },
+        ["time"] = new[] { "giây", "phút", "giờ", "ngày" }
+    };
+    var currentUnits = unitMap.ContainsKey(Model.Category) ? unitMap[Model.Category] : unitMap["length"];
+}
+
+<section class="page-header">
+    <div class="container">
+        <div class="gm-breadcrumb mb-3">
+            <a asp-controller="Home" asp-action="Index">Trang chủ</a> /
+            <span>Chuyển đổi đơn vị</span>
+        </div>
+        <div class="page-icon" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);"><i class="bi bi-arrow-left-right"></i></div>
+        <h1>Chuyển đổi đơn vị</h1>
+        <p>Độ dài, khối lượng, diện tích, thể tích và thời gian</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-6">
+                <div class="gm-form-card">
+                    <h5 class="fw-700 mb-4 text-white">Nhập thông tin</h5>
+                    <form method="post" id="converterForm">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label class="form-label">Loại đơn vị</label>
+                            <select class="form-select" name="Category" id="Category" onchange="updateUnitOptions(); document.getElementById('converterForm').submit()">
+                                <option value="length" selected="@(Model.Category == "length")">📏 Độ dài</option>
+                                <option value="mass" selected="@(Model.Category == "mass")">⚖️ Khối lượng</option>
+                                <option value="area" selected="@(Model.Category == "area")">📐 Diện tích</option>
+                                <option value="volume" selected="@(Model.Category == "volume")">🧊 Thể tích</option>
+                                <option value="time" selected="@(Model.Category == "time")">⏱️ Thời gian</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Giá trị</label>
+                            <input type="number" class="form-control" name="Value" value="@Model.Value" step="any" placeholder="Nhập giá trị" style="font-size:1.2rem;font-weight:600;" />
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-5">
+                                <label class="form-label">Từ đơn vị</label>
+                                <select class="form-select" name="FromUnit" id="FromUnit">
+                                    @foreach (var u in currentUnits)
+                                    {
+                                        <option value="@u" selected="@(Model.FromUnit == u)">@u</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-2 d-flex align-items-end justify-content-center pb-2">
+                                <i class="bi bi-arrow-right" style="color:#22c55e;font-size:1.3rem;"></i>
+                            </div>
+                            <div class="col-5">
+                                <label class="form-label">Sang đơn vị</label>
+                                <select class="form-select" name="ToUnit" id="ToUnit">
+                                    @foreach (var u in currentUnits)
+                                    {
+                                        <option value="@u"
+                                                selected="@(Model.ToUnit == u || u == currentUnits.ElementAtOrDefault(1))">
+                                            @u
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-gm-primary w-100">
+                            <i class="bi bi-arrow-left-right me-2"></i>Chuyển đổi
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                @if (Model.Result.HasValue)
+                {
+                    <div class="result-box mb-4 text-center">
+                        <div class="result-label"><i class="bi bi-check2-circle me-1"></i>Kết quả</div>
+                        <div class="result-value">@Model.Result?.ToString("F2") <span style="font-size:1.2rem;color:#94a3b8;">@Model.ToUnit</span></div>
+                        <div class="result-sub">@Model.Value @Model.FromUnit = @Model.Result?.ToString("F2") @Model.ToUnit</div>
+                    </div>
+
+                    <div class="gm-form-card">
+                        <div style="font-size:0.8rem;color:#94a3b8;margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Công thức</div>
+                        <div style="font-size:1.05rem;color:#cbd5e1;background:rgba(255,255,255,0.04);padding:14px;border-radius:10px;">
+                            @Model.Formula
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="gm-form-card text-center py-5">
+                        <i class="bi bi-arrows-angle-contract" style="font-size:3rem;color:#334155;"></i>
+                        <p class="mt-3" style="color:#475569;">Chọn loại đơn vị, nhập giá trị và nhấn chuyển đổi</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

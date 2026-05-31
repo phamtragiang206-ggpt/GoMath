@@ -1,0 +1,125 @@
+@model GoMath.Models.UtilityBillViewModel
+@{
+    ViewData["Title"] = "Tính tiền điện / nước";
+}
+
+<section class="page-header">
+    <div class="container">
+        <div class="gm-breadcrumb mb-3">
+            <a asp-controller="Home" asp-action="Index">Trang chủ</a> /
+            <span>Tính tiền điện / nước</span>
+        </div>
+        <div class="page-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444);"><i class="bi bi-plug-fill"></i></div>
+        <h1>Tính tiền điện / nước</h1>
+        <p>Tính theo giá bậc thang EVN 2024, hiển thị chi tiết từng bậc</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="gm-form-card">
+                    <h5 class="fw-700 mb-4 text-white">Nhập thông tin</h5>
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label class="form-label">Loại hóa đơn</label>
+                            <div class="type-toggle">
+                                <input type="radio" name="BillType" id="typeElec" value="electricity" @(Model.BillType=="electricity"?"checked":"") />
+                                <label for="typeElec"><i class="bi bi-lightning-fill me-1"></i>Điện</label>
+                                <input type="radio" name="BillType" id="typeWater" value="water" @(Model.BillType=="water"?"checked":"") />
+                                <label for="typeWater"><i class="bi bi-droplet-fill me-1"></i>Nước</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Chỉ số đầu kỳ</label>
+                            <input type="number" class="form-control" name="StartIndex" value="@Model.StartIndex" min="0" step="any" placeholder="0" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Chỉ số cuối kỳ</label>
+                            <input type="number" class="form-control" name="EndIndex" value="@Model.EndIndex" min="0" step="any" placeholder="150" />
+                        </div>
+
+                        <button type="submit" class="btn-gm-primary w-100">
+                            <i class="bi bi-calculator me-2"></i>Tính tiền
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                @if (Model.TotalCost.HasValue)
+                {
+                    <div class="row g-3 mb-4">
+                        <div class="col-sm-6">
+                            <div style="background:var(--dark-card);border:1px solid var(--dark-border);border-radius:var(--radius);padding:20px;text-align:center;">
+                                <div style="font-size:0.8rem;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Lượng tiêu thụ</div>
+                                <div style="font-size:2rem;font-weight:800;color:white;margin-top:4px;">
+                                    @Model.Usage?.ToString("F0")
+                                    <span style="font-size:1rem;color:#94a3b8;">@(Model.BillType == "electricity" ? "kWh" : "m³")</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="result-box text-center h-100">
+                                <div class="result-label"><i class="bi bi-cash-stack me-1"></i>Tổng tiền (bao gồm VAT)</div>
+                                <div class="result-value" style="font-size:2rem;">@Model.TotalCost?.ToString("N0") <span style="font-size:1rem;">đ</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gm-form-card">
+                        <h6 class="fw-700 mb-3" style="color:#94a3b8;text-transform:uppercase;font-size:0.8rem;letter-spacing:1px;">
+                            <i class="bi bi-table me-1"></i>Chi tiết từng bậc
+                        </h6>
+                        <div style="overflow-x:auto;">
+                            <table class="gm-table bill-detail-table">
+                                <thead>
+                                    <tr>
+                                        <th>Bậc tiêu thụ</th>
+                                        <th>@(Model.BillType == "electricity" ? "kWh" : "m³")</th>
+                                        <th>Đơn giá (đ)</th>
+                                        <th>Thành tiền (đ)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var tier in Model.TierDetails)
+                                    {
+                                        <tr @(tier.TierName.StartsWith("VAT") ? "style='font-weight:600;color:var(--accent);'" : "")>
+                                            <td>@tier.TierName</td>
+                                            <td>@(tier.Kwh > 0 ? tier.Kwh.ToString("F0") : "-")</td>
+                                            <td>@(tier.UnitPrice > 0 ? tier.UnitPrice.ToString("N0") : "-")</td>
+                                            <td>@tier.SubTotal.ToString("N0")</td>
+                                        </tr>
+                                    }
+                                    <tr style="font-weight:700;color:var(--primary);border-top:2px solid var(--dark-border);">
+                                        <td colspan="3">TỔNG CỘNG</td>
+                                        <td>@Model.TotalCost?.ToString("N0") đ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-3" style="background:rgba(255,255,255,0.04);border-radius:10px;padding:14px;font-size:0.82rem;color:#64748b;">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Giá điện áp dụng theo bảng giá EVN 2024. Giá nước theo biểu giá SAWACO. Đã bao gồm VAT 10%.
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="gm-form-card text-center py-5">
+                        <i class="bi bi-receipt" style="font-size:3rem;color:#334155;"></i>
+                        <p class="mt-3" style="color:#475569;">Nhập chỉ số và nhấn "Tính tiền" để xem hóa đơn</p>
+                        <div class="mt-3" style="font-size:0.85rem;color:#475569;">
+                            Áp dụng giá bậc thang EVN 2024
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
