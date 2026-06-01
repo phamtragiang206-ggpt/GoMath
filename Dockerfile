@@ -15,7 +15,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-# Cấu hình cổng (Port) theo biến môi trường của Render
+# Cấu hình cổng (Port) cố định 10000 cho Render
 ENV ASPNETCORE_URLS=http://+:10000
 EXPOSE 10000
 
