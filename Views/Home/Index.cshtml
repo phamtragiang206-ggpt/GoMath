@@ -2,228 +2,305 @@
     ViewData["Title"] = "Trang chủ";
 }
 
-<!-- HERO -->
+<!-- Banner -->
+
 <section class="hero-section">
     <div class="container">
-        <div class="row align-items-center g-5">
+
+        <div class="row align-items-center">
+
             <div class="col-lg-6">
-                <div class="hero-badge">
-                    <i class="bi bi-star-fill"></i>
-                    Dành cho học sinh THPT
+
+                <div class="hero-badge mb-3">
+                    <i class="bi bi-mortarboard-fill"></i>
+                    Website hỗ trợ học tập
                 </div>
-                <h1 class="hero-title mb-4">
-                    Học Toán<br>
-                    <span class="highlight">Thông Minh Hơn</span><br>
-                    Cùng GoMath
+
+                <h1 class="hero-title">
+                    GoMath
+                    <br />
+                        <span class="highlight" style="white-space: nowrap;">
+                            Học Toán mỗi ngày
+                        </span>
                 </h1>
-                <p class="hero-desc mb-5">
-                    Công cụ học tập và tính toán miễn phí – giải phương trình, tính điểm, chuyển đổi đơn vị và nhiều hơn nữa.
+
+                <p class="hero-desc mt-4">
+                    GoMath là website hỗ trợ học sinh THPT trong việc học tập và tính toán.
+                    Hệ thống cung cấp các công cụ giải phương trình, tính điểm,
+                    chuyển đổi đơn vị và quản lý học sinh.
                 </p>
-                <div class="d-flex flex-wrap gap-3">
+
+                <div class="mt-4 d-flex gap-3">
+
                     <a href="#features" class="btn-primary-gm">
-                        <i class="bi bi-rocket-takeoff-fill"></i>
-                        Bắt đầu ngay
+                        <i class="bi bi-play-fill"></i>
+                        Khám phá ngay
                     </a>
-                    <a asp-controller="Students" asp-action="Index" class="btn-outline-gm">
-                        <i class="bi bi-people"></i>
+
+                    <a asp-controller="Students"
+                       asp-action="Index"
+                       class="btn-outline-gm">
+                        <i class="bi bi-people-fill"></i>
                         Quản lý học sinh
                     </a>
+
                 </div>
+
             </div>
+
             <div class="col-lg-6 d-none d-lg-block">
-                <div class="hero-card-stack">
-                    <div class="floating-card card-sm-1">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <div class="card-icon-wrap icon-green" style="width:32px;height:32px;font-size:1rem;border-radius:8px;margin:0;">
-                                <i class="bi bi-check2-circle"></i>
-                            </div>
-                            <span style="font-size:0.8rem;color:#94a3b8;font-weight:600;">KẾT QUẢ</span>
-                        </div>
-                        <div style="font-size:1.2rem;font-weight:800;color:white;">x = 3.50</div>
-                        <div style="font-size:0.75rem;color:#94a3b8;">Phương trình bậc nhất</div>
+
+                <div class="hero-preview">
+
+                    <div class="preview-card small-card">
+
+                        <h6>Kết quả</h6>
+
+                        <h4>x = 3.5</h4>
+
+                        <small>Phương trình bậc nhất</small>
+
                     </div>
-                    <div class="floating-card card-main">
-                        <div class="mb-3 d-flex align-items-center gap-2">
-                            <div class="card-icon-wrap icon-yellow" style="width:40px;height:40px;font-size:1.1rem;border-radius:10px;margin:0;">
-                                <i class="bi bi-calculator"></i>
-                            </div>
+
+                    <div class="preview-card main-card">
+
+                        <div class="d-flex align-items-center mb-3">
+
+                            <i class="bi bi-calculator fs-3 me-2"></i>
+
                             <div>
-                                <div style="font-size:0.9rem;font-weight:700;color:white;">Giải phương trình</div>
-                                <div style="font-size:0.75rem;color:#94a3b8;">ax² + bx + c = 0</div>
+                                <strong>Giải phương trình</strong>
+                                <br />
+                                <small>ax² + bx + c = 0</small>
                             </div>
+
                         </div>
-                        <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:12px;font-size:0.85rem;color:#94a3b8;">
-                            Δ = b² - 4ac = <span style="color:#22c55e;font-weight:700;">49</span>
+
+                        <div class="result-box">
+                            Δ = b² - 4ac = 49
                         </div>
-                        <div class="mt-2" style="font-size:0.82rem;color:#e2e8f0;">
-                            x₁ = <span style="color:#eab308;">2.00</span>, x₂ = <span style="color:#eab308;">-1.00</span>
-                        </div>
+
+                        <p class="mt-3 mb-0">
+                            x₁ = 2 &nbsp;&nbsp; | &nbsp;&nbsp; x₂ = -1
+                        </p>
+
                     </div>
-                    <div class="floating-card card-sm-2">
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <div class="card-icon-wrap icon-blue" style="width:32px;height:32px;font-size:1rem;border-radius:8px;margin:0;">
-                                <i class="bi bi-award-fill"></i>
-                            </div>
-                            <span style="font-size:0.8rem;color:#94a3b8;font-weight:600;">XẾP LOẠI</span>
-                        </div>
-                        <div style="font-size:1.2rem;font-weight:800;color:white;">8.25</div>
-                        <div class="rank-badge rank-tot">Tốt</div>
+
+                    <div class="preview-card small-card">
+
+                        <h6>Xếp loại</h6>
+
+                        <h4>8.25</h4>
+
+                        <span class="rank-badge rank-tot">
+                            Tốt
+                        </span>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+    
 </section>
 
-<!-- STATS -->
-<section class="py-5" style="background:rgba(255,255,255,0.02);border-bottom:1px solid #1e293b;">
-    <div class="container">
-        <div class="row g-4 text-center">
-            <div class="col-6 col-md-3">
-                <div style="font-size:2rem;font-weight:800;color:var(--primary);">6+</div>
-                <div style="color:#94a3b8;font-size:0.88rem;">Công cụ học tập</div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div style="font-size:2rem;font-weight:800;color:var(--accent);">CRUD</div>
-                <div style="color:#94a3b8;font-size:0.88rem;">Quản lý học sinh</div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div style="font-size:2rem;font-weight:800;color:#60a5fa;">MVC</div>
-                <div style="color:#94a3b8;font-size:0.88rem;">ASP.NET Core</div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div style="font-size:2rem;font-weight:800;color:#c084fc;">KaTeX</div>
-                <div style="color:#94a3b8;font-size:0.88rem;">Hiển thị công thức</div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Chức năng -->
 
-<!-- FEATURES -->
-<section class="py-5 py-lg-6" id="features">
+<section id="features" class="py-5">
+
+    ```
     <div class="container">
+
         <div class="text-center mb-5">
-            <div class="section-label">Tính năng</div>
-            <h2 class="section-title mt-2">Tất cả công cụ bạn cần</h2>
-            <p class="text-muted">Từ giải phương trình đến quản lý lớp học – GoMath có tất cả.</p>
+
+            <h2>Các chức năng chính</h2>
+
+            <p class="text-muted">
+                Website cung cấp các công cụ hỗ trợ học tập và quản lý học sinh.
+            </p>
+
         </div>
 
-        <!-- Learning Tools -->
-        <div class="mb-4">
-            <h5 class="mb-3 fw-700" style="color:#94a3b8;font-size:0.85rem;text-transform:uppercase;letter-spacing:1.5px;">
-                <i class="bi bi-mortarboard-fill me-2 text-primary" style="color:var(--primary)!important;"></i>Công cụ học tập
-            </h5>
-            <div class="row g-3">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="gm-card p-4">
-                        <div class="card-icon-wrap icon-green"><i class="bi bi-superscript"></i></div>
-                        <div class="card-title">Giải phương trình</div>
-                        <p class="card-text">Bậc nhất và bậc hai, hiển thị từng bước chi tiết kèm Δ.</p>
-                        <a asp-controller="Tools" asp-action="Equation" class="card-link mt-2 d-inline-block">
-                            Dùng ngay <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="gm-card p-4">
-                        <div class="card-icon-wrap icon-yellow"><i class="bi bi-award-fill"></i></div>
-                        <div class="card-title">Tính điểm & xếp loại</div>
-                        <p class="card-text">Tính điểm trung bình môn và xếp loại học lực tự động.</p>
-                        <a asp-controller="Tools" asp-action="Grade" class="card-link mt-2 d-inline-block">
-                            Dùng ngay <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="gm-card p-4">
-                        <div class="card-icon-wrap icon-blue"><i class="bi bi-123"></i></div>
-                        <div class="card-title">Số nguyên tố</div>
-                        <p class="card-text">Kiểm tra và giải thích có phải số nguyên tố không.</p>
-                        <a asp-controller="Tools" asp-action="Prime" class="card-link mt-2 d-inline-block">
-                            Dùng ngay <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="gm-card p-4">
-                        <div class="card-icon-wrap icon-purple"><i class="bi bi-exclamation-circle-fill"></i></div>
-                        <div class="card-title">Giai thừa n!</div>
-                        <p class="card-text">Tính n! với khai triển đầy đủ dạng nhân.</p>
-                        <a asp-controller="Tools" asp-action="Factorial" class="card-link mt-2 d-inline-block">
-                            Dùng ngay <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
+        <!-- Công cụ học tập -->
+        <h4 class="mb-4">
+            <i class="bi bi-book-fill me-2"></i>
+            Công cụ học tập
+        </h4>
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="gm-card p-4 h-100">
+
+                    <i class="bi bi-superscript fs-1 text-success"></i>
+
+                    <h5 class="mt-3">
+                        Giải phương trình
+                    </h5>
+
+                    <p>
+                        Giải phương trình bậc nhất và bậc hai.
+                    </p>
+
+                    <a asp-controller="Tools"
+                       asp-action="Equation"
+                       class="card-link">
+                        Sử dụng
+                    </a>
+
                 </div>
             </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="gm-card p-4 h-100">
+
+                    <i class="bi bi-award-fill fs-1 text-warning"></i>
+
+                    <h5 class="mt-3">
+                        Tính điểm
+                    </h5>
+
+                    <p>
+                        Tính điểm trung bình và xếp loại học lực.
+                    </p>
+
+                    <a asp-controller="Tools"
+                       asp-action="Grade"
+                       class="card-link">
+                        Sử dụng
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="gm-card p-4 h-100">
+
+                    <i class="bi bi-123 fs-1 text-primary"></i>
+
+                    <h5 class="mt-3">
+                        Số nguyên tố
+                    </h5>
+
+                    <p>
+                        Kiểm tra số nguyên tố.
+                    </p>
+
+                    <a asp-controller="Tools"
+                       asp-action="Prime"
+                       class="card-link">
+                        Sử dụng
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="gm-card p-4 h-100">
+
+                    <i class="bi bi-exclamation-circle-fill fs-1 text-danger"></i>
+
+                    <h5 class="mt-3">
+                        Giai thừa
+                    </h5>
+
+                    <p>
+                        Tính giá trị giai thừa n!.
+                    </p>
+
+                    <a asp-controller="Tools"
+                       asp-action="Factorial"
+                       class="card-link">
+                        Sử dụng
+                    </a>
+
+                </div>
+            </div>
+
         </div>
 
-        <!-- Life Tools -->
-        <div class="mb-4">
-            <h5 class="mb-3" style="color:#94a3b8;font-size:0.85rem;text-transform:uppercase;letter-spacing:1.5px;">
-                <i class="bi bi-lightning-fill me-2" style="color:#22d3ee;"></i>Công cụ đời sống
-            </h5>
-            <div class="row g-3">
-                <div class="col-sm-6 col-lg-4">
-                    <div class="gm-card p-4">
-                        <div class="card-icon-wrap icon-cyan"><i class="bi bi-arrow-left-right"></i></div>
-                        <div class="card-title">Chuyển đổi đơn vị</div>
-                        <p class="card-text">Độ dài, khối lượng, diện tích, thể tích và thời gian.</p>
-                        <a asp-controller="Tools" asp-action="UnitConverter" class="card-link mt-2 d-inline-block">
-                            Dùng ngay <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="gm-card p-4">
-                        <div class="card-icon-wrap icon-red"><i class="bi bi-plug-fill"></i></div>
-                        <div class="card-title">Tính tiền điện / nước</div>
-                        <p class="card-text">Áp dụng giá bậc thang, hiển thị chi tiết từng bậc.</p>
-                        <a asp-controller="Tools" asp-action="UtilityBill" class="card-link mt-2 d-inline-block">
-                            Dùng ngay <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
+        <!-- Công cụ đời sống -->
+        <h4 class="mt-5 mb-4">
+            <i class="bi bi-lightning-fill me-2"></i>
+            Công cụ đời sống
+        </h4>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-4">
+                <div class="gm-card p-4">
+
+                    <h5>Chuyển đổi đơn vị</h5>
+
+                    <p>
+                        Hỗ trợ chuyển đổi độ dài, diện tích,
+                        thể tích, khối lượng và thời gian.
+                    </p>
+
+                    <a asp-controller="Tools"
+                       asp-action="UnitConverter"
+                       class="card-link">
+                        Sử dụng
+                    </a>
+
                 </div>
             </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="gm-card p-4">
+
+                    <h5>Tính tiền điện / nước</h5>
+
+                    <p>
+                        Tính chi phí điện hoặc nước theo bậc thang.
+                    </p>
+
+                    <a asp-controller="Tools"
+                       asp-action="UtilityBill"
+                       class="card-link">
+                        Sử dụng
+                    </a>
+
+                </div>
+            </div>
+
         </div>
 
-        <!-- Student Management -->
-        <div>
-            <h5 class="mb-3" style="color:#94a3b8;font-size:0.85rem;text-transform:uppercase;letter-spacing:1.5px;">
-                <i class="bi bi-people-fill me-2" style="color:#c084fc;"></i>Quản lý học sinh
-            </h5>
-            <div class="row g-3">
-                <div class="col-12 col-lg-8">
-                    <div class="gm-card p-4">
-                        <div class="d-flex align-items-start gap-4 flex-wrap">
-                            <div class="card-icon-wrap icon-purple"><i class="bi bi-person-badge-fill"></i></div>
-                            <div class="flex-grow-1">
-                                <div class="card-title">Hệ thống CRUD học sinh</div>
-                                <p class="card-text mb-3">Xem, thêm, sửa, xóa thông tin học sinh. Tìm kiếm theo tên và lọc theo lớp.</p>
-                                <div class="d-flex flex-wrap gap-2">
-                                    <span class="badge" style="background:rgba(34,197,94,0.15);color:var(--primary);padding:5px 12px;border-radius:100px;font-size:0.78rem;">
-                                        <i class="bi bi-eye me-1"></i>Xem danh sách
-                                    </span>
-                                    <span class="badge" style="background:rgba(59,130,246,0.15);color:#60a5fa;padding:5px 12px;border-radius:100px;font-size:0.78rem;">
-                                        <i class="bi bi-plus-circle me-1"></i>Thêm mới
-                                    </span>
-                                    <span class="badge" style="background:rgba(234,179,8,0.15);color:var(--accent);padding:5px 12px;border-radius:100px;font-size:0.78rem;">
-                                        <i class="bi bi-pencil me-1"></i>Chỉnh sửa
-                                    </span>
-                                    <span class="badge" style="background:rgba(239,68,68,0.15);color:#f87171;padding:5px 12px;border-radius:100px;font-size:0.78rem;">
-                                        <i class="bi bi-trash me-1"></i>Xóa
-                                    </span>
-                                    <span class="badge" style="background:rgba(168,85,247,0.15);color:#c084fc;padding:5px 12px;border-radius:100px;font-size:0.78rem;">
-                                        <i class="bi bi-search me-1"></i>Tìm kiếm
-                                    </span>
-                                </div>
-                            </div>
-                            <a asp-controller="Students" asp-action="Index" class="btn-gm-primary align-self-start">
-                                Mở ngay <i class="bi bi-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- CRUD -->
+        <h4 class="mt-5 mb-4">
+            <i class="bi bi-people-fill me-2"></i>
+            Quản lý học sinh
+        </h4>
+
+        <div class="gm-card p-4">
+
+            <h5>Chức năng quản lý học sinh</h5>
+
+            <p>
+                Cho phép quản lý thông tin học sinh trong hệ thống.
+            </p>
+
+            <ul>
+                <li>Xem danh sách học sinh</li>
+                <li>Thêm học sinh mới</li>
+                <li>Chỉnh sửa thông tin</li>
+                <li>Xóa học sinh</li>
+                <li>Tìm kiếm học sinh</li>
+            </ul>
+
+            <a asp-controller="Students"
+               asp-action="Index"
+               class="btn-gm-primary">
+                Truy cập chức năng
+            </a>
+
         </div>
+
     </div>
+    ```
+
 </section>

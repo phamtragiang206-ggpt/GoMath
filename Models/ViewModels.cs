@@ -2,10 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GoMath.Models
 {
-    // Equation Solver
+    
     public class EquationViewModel
     {
-        public string EquationType { get; set; } = "linear"; // linear or quadratic
+        public string EquationType { get; set; } = "linear"; 
         public double A { get; set; }
         public double B { get; set; }
         public double C { get; set; }
@@ -13,7 +13,7 @@ namespace GoMath.Models
         public List<string> Steps { get; set; } = new();
     }
 
-    // Grade Calculator
+   
     public class GradeViewModel
     {
         [Range(0, 10, ErrorMessage = "Điểm phải từ 0 đến 10")]
@@ -29,7 +29,7 @@ namespace GoMath.Models
         public string? Rank { get; set; }
     }
 
-    // Prime Number
+    
     public class PrimeViewModel
     {
         public long Number { get; set; }
@@ -37,7 +37,7 @@ namespace GoMath.Models
         public string? Explanation { get; set; }
     }
 
-    // Factorial
+   
     public class FactorialViewModel
     {
         [Range(0, 20, ErrorMessage = "Số phải từ 0 đến 20")]
@@ -46,7 +46,7 @@ namespace GoMath.Models
         public string? Expansion { get; set; }
     }
 
-    // Unit Converter
+    
     public class UnitConverterViewModel
     {
         public string Category { get; set; } = "length";
@@ -57,10 +57,10 @@ namespace GoMath.Models
         public string? Formula { get; set; }
     }
 
-    // Electricity/Water Bill
+  
     public class UtilityBillViewModel
     {
-        public string BillType { get; set; } = "electricity"; // electricity or water
+        public string BillType { get; set; } = "electricity"; 
         public double StartIndex { get; set; }
         public double EndIndex { get; set; }
         public double? Usage { get; set; }

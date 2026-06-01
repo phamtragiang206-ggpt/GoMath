@@ -1,6 +1,4 @@
-// GoMath - site.js
 
-// Auto-dismiss alerts
 document.addEventListener('DOMContentLoaded', function () {
     const alerts = document.querySelectorAll('.auto-dismiss');
     alerts.forEach(function (alert) {
@@ -10,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 4000);
     });
 
-    // Animate cards on scroll
+
     const cards = document.querySelectorAll('.gm-card');
     if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
@@ -31,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Unit converter: update unit options when category changes
+
 function updateUnitOptions() {
     const category = document.getElementById('Category')?.value;
     const fromSelect = document.getElementById('FromUnit');
@@ -56,7 +54,7 @@ function updateUnitOptions() {
     if (units.length > 1) toSelect.selectedIndex = 1;
 }
 
-// Confirm delete
+
 function confirmDelete(name) {
     return confirm(`Bạn có chắc muốn xóa học sinh "${name}" không?`);
 }

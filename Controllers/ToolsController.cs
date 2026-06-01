@@ -5,7 +5,7 @@ namespace GoMath.Controllers
 {
     public class ToolsController : Controller
     {
-        // ===== EQUATION SOLVER =====
+
         public IActionResult Equation()
         {
             return View(new EquationViewModel());
@@ -35,7 +35,7 @@ namespace GoMath.Controllers
             }
             else
             {
-                // ax² + bx + c = 0
+                
                 if (model.A == 0)
                 {
                     model.Steps.Add("Hệ số a = 0, đây không phải phương trình bậc hai.");
@@ -74,7 +74,7 @@ namespace GoMath.Controllers
             return View(model);
         }
 
-        // ===== GRADE CALCULATOR =====
+        
         public IActionResult Grade()
         {
             return View(new GradeViewModel());
@@ -95,7 +95,7 @@ namespace GoMath.Controllers
             return View(model);
         }
 
-        // ===== PRIME NUMBER =====
+        
         public IActionResult Prime()
         {
             return View(new PrimeViewModel());
@@ -142,7 +142,6 @@ namespace GoMath.Controllers
             return View(model);
         }
 
-        // ===== FACTORIAL =====
         public IActionResult Factorial()
         {
             return View(new FactorialViewModel());
@@ -175,7 +174,7 @@ namespace GoMath.Controllers
             return View(model);
         }
 
-        // ===== UNIT CONVERTER =====
+       
         public IActionResult UnitConverter()
         {
             return View(new UnitConverterViewModel());
@@ -205,7 +204,7 @@ namespace GoMath.Controllers
             return View(model);
         }
 
-        // ===== UTILITY BILL =====
+       
         public IActionResult UtilityBill()
         {
             return View(new UtilityBillViewModel());
@@ -227,7 +226,7 @@ namespace GoMath.Controllers
 
             if (model.BillType == "electricity")
             {
-                // EVN electricity price tiers (2024)
+               
                 var tiers = new[]
                 {
                     (name: "Bậc 1 (0–50 kWh)", max: 50.0, price: 1806.0),
@@ -255,7 +254,7 @@ namespace GoMath.Controllers
                     remaining -= kwh;
                 }
             }
-            else // water
+            else 
             {
                 var tiers = new[]
                 {
